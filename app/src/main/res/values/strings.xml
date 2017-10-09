@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Label for sort order preference [CHAR LIMIT=30] -->
+    <string name="pref_sort_order_label">Sort Order</string>
+
+    <!-- Label for popularity [CHAR LIMIT=25] -->
+    <string name="pref_sort_order_label_popularity">Popularity</string>
+
+    <!-- Label for rating [CHAR LIMIT=25] -->
+    <string name="pref_sort_order_label_rating">Rating</string>
+
+    <!-- Key name for sort preference in SharedPreferences [CHAR LIMIT=NONE] -->
+    <string name="pref_sort_order_key" translatable="false">sort</string>
+
+    <!-- Value in SharedPreferences for popularity [CHAR LIMIT=NONE] -->
+    <string name="pref_sort_order_popularity" translatable="false">popularity</string>
+
+    <!-- Value in SharedPreferences for rating [CHAR LIMIT=NONE] -->
+    <string name="pref_sort_order_rating" translatable="false">rating</string>
+</resources>
