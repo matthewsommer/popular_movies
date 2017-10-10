@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.company.matt.popularmovies">
+    package="io.mattsommer.popularmovies">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -23,7 +23,7 @@
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.company.matt.popularmovies.MovieDetailActivity" />
+                android:value="io.mattsommer.popularmovies.MovieDetailActivity" />
         </activity>
         <activity
             android:name=".SettingsActivity"
@@ -31,7 +31,7 @@
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.company.matt.popularmovies.MainActivity" />
+                android:value="io.mattsommer.popularmovies.MainActivity" />
         </activity>
     </application>
 

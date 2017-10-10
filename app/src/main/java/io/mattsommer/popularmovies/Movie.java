@@ -1,4 +1,4 @@
-package com.company.matt.popularmovies;
+package io.mattsommer.popularmovies;
 
 import android.os.Parcel;
 import android.os.Parcelable;

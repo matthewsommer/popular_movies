@@ -1,4 +1,4 @@
-package com.company.matt.popularmovies;
+package io.mattsommer.popularmovies;
 
 import org.junit.Test;
 
