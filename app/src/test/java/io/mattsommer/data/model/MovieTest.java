@@ -11,10 +11,16 @@ import static org.junit.Assert.*;
 public class MovieTest {
 
     private Movie movie;
+    private static String id = "346364";
+    private static String original_title = "It";
+    private static String vote_average = "7.4";
+    private static String release_date = "2017-09-05";
+    private static String overview = "In a small town in Maine...";
+    private static String poster_path = "/9E2y5Q7WlCVNEhP5GiVTjhEhx1o.jpg";
 
     @Before
     public void setUp() {
-        movie = new Movie("0","Test","Test","Test","0","Overview");
+        movie = new Movie(id,original_title,release_date,poster_path,vote_average,overview);
     }
 
     @Test
@@ -29,57 +35,32 @@ public class MovieTest {
 
     @Test
     public void getId() throws Exception {
-        assertNotNull(movie.getId());
+        assertEquals("id incorrect",id,movie.getId());
     }
 
     @Test
     public void getOriginal_title() throws Exception {
-        assertNotNull(movie.getOriginal_title());
-    }
-
-    @Test
-    public void setOriginal_title() throws Exception {
-
+        assertEquals("original title incorrect",original_title,movie.getOriginal_title());
     }
 
     @Test
     public void getRelease_date() throws Exception {
-
-    }
-
-    @Test
-    public void setRelease_date() throws Exception {
-
+        assertEquals("release date incorrect",release_date,movie.getRelease_date());
     }
 
     @Test
     public void getPoster_path() throws Exception {
-
-    }
-
-    @Test
-    public void setPoster_path() throws Exception {
-
+        assertEquals("poster path incorrect",poster_path,movie.getPoster_path());
     }
 
     @Test
     public void getVote_average() throws Exception {
-
-    }
-
-    @Test
-    public void setVote_average() throws Exception {
-
+        assertEquals("vote average incorrect", vote_average, movie.getVote_average());
     }
 
     @Test
     public void getOverview() throws Exception {
-
-    }
-
-    @Test
-    public void setOverview() throws Exception {
-
+        assertEquals("overview incorrect", overview, movie.getOverview());
     }
 
 }
