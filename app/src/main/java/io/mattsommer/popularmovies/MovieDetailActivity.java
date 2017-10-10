@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
+import io.mattsommer.data.model.Movie;
+
 public class MovieDetailActivity extends AppCompatActivity {
 
     @Override
@@ -61,16 +63,16 @@ public class MovieDetailActivity extends AppCompatActivity {
             if (intent != null && intent.hasExtra("Movie")) {
                 movie = (Movie)intent.getParcelableExtra("Movie");
                 ((TextView) rootView.findViewById(R.id.detail_text))
-                        .setText(movie.original_title);
+                        .setText(movie.getOriginal_title());
                 ((TextView) rootView.findViewById(R.id.detail_release_date))
-                        .setText("Released " + movie.release_date);
+                        .setText("Released " + movie.getRelease_date());
                 ((TextView) rootView.findViewById(R.id.detail_vote_average))
-                        .setText("Vote average " + movie.vote_average);
+                        .setText("Vote average " + movie.getVote_average());
                 ((TextView) rootView.findViewById(R.id.detail_overview))
-                        .setText(movie.overview);
+                        .setText(movie.getOverview());
 
                 ImageView iconView = (ImageView) rootView.findViewById(R.id.list_item_icon);
-                Picasso.with(getContext()).load("http://image.tmdb.org/t/p/w185/"+movie.poster_path).into(iconView);
+                Picasso.with(getContext()).load("http://image.tmdb.org/t/p/w185/"+movie.getPoster_path()).into(iconView);
             }
 
             return rootView;

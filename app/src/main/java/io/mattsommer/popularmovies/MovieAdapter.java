@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import com.squareup.picasso.Picasso;
 import java.util.List;
 
+import io.mattsommer.data.model.Movie;
+
 public class MovieAdapter extends ArrayAdapter<Movie> {
     private static final String LOG_TAG = MovieAdapter.class.getSimpleName();
 
@@ -42,7 +44,7 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
         }
 
         GridViewHolder gridViewHolder = new GridViewHolder(convertView);
-        Picasso.with(getContext()).load("http://image.tmdb.org/t/p/w185/"+movie.poster_path).into(gridViewHolder.iconView);
+        Picasso.with(getContext()).load("http://image.tmdb.org/t/p/w185/"+movie.getPoster_path()).into(gridViewHolder.iconView);
 
         return convertView;
     }

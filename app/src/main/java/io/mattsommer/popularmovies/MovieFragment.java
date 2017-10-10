@@ -26,6 +26,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.mattsommer.data.model.Movie;
+
 public class MovieFragment extends Fragment {
 
     private MovieAdapter mMovieAdapter;
