@@ -13,12 +13,20 @@ public final class Movie implements Parcelable {
 
     @NonNull
     String id;
+
+    @NonNull
     String original_title;
+
+    @NonNull
     String release_date;
+
+    @NonNull
     String poster_path;
+
+    @NonNull
     String vote_average;
 
-    @Nullable
+    @NonNull
     String overview;
 
     /**
@@ -85,18 +93,26 @@ public final class Movie implements Parcelable {
     public String getId() {
         return id;
     }
+
+    @NonNull
     public String getOriginal_title() {
         return original_title;
     }
+
+    @NonNull
     public String getRelease_date() {
         return release_date;
     }
+
+    @NonNull
     public String getPoster_path() {
         return poster_path;
     }
-    public String getVote_average() {
-        return vote_average;
-    }
+
+    @NonNull
+    public String getVote_average() { return vote_average; }
+
+    @NonNull
     public String getOverview() {
         return overview;
     }
