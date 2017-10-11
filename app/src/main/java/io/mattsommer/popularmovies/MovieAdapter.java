@@ -44,7 +44,7 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
         }
 
         GridViewHolder gridViewHolder = new GridViewHolder(convertView);
-        Picasso.with(getContext()).load("http://image.tmdb.org/t/p/w185/"+movie.getPoster_path()).into(gridViewHolder.iconView);
+        Picasso.with(getContext()).load("http://image.tmdb.org/t/p/w500/"+movie.getPoster_path()).into(gridViewHolder.iconView);
 
         return convertView;
     }
