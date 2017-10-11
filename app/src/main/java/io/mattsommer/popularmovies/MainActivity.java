@@ -28,7 +28,12 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         String sortValue = sharedPref.getString("sort", "");
-        setTitle("Movies by " + sortValue);
+        if(sortValue.matches("popularity")) {
+            setTitle(getString(R.string.title_recent_popular));
+        } else {
+            setTitle(getString(R.string.title_all_time_popular));
+        }
+
     }
 
     @Override

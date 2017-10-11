@@ -19,6 +19,12 @@
     <!-- Value in SharedPreferences for popularity [CHAR LIMIT=NONE] -->
     <string name="pref_sort_order_popularity" translatable="false">popularity</string>
 
+    <!-- String value for main activity title recent popular movies -->
+    <string name="title_recent_popular">Recent Popular Movies</string>
+
+    <!-- String value for main activity title all-time popular movies -->
+    <string name="title_all_time_popular">All-time Popular Movies</string>
+
     <!-- Value in SharedPreferences for rating [CHAR LIMIT=NONE] -->
     <string name="pref_sort_order_rating" translatable="false">rating</string>
 </resources>
