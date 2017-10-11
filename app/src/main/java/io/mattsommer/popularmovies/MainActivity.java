@@ -27,13 +27,11 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String sortValue = sharedPref.getString("sort", "");
-        if(sortValue.matches("popularity")) {
+        if (sharedPref.getString("sort", "").matches("popularity")) {
             setTitle(getString(R.string.title_recent_popular));
         } else {
             setTitle(getString(R.string.title_all_time_popular));
         }
-
     }
 
     @Override
