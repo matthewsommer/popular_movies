@@ -1,10 +1,12 @@
-package io.mattsommer.popularmovies;
+package io.mattsommer.ui.movie;
 
 import android.view.View;
 import android.widget.ImageView;
 
+import io.mattsommer.popularmovies.R;
+
 /**
- * Created by Matt on 6/14/16.
+ * Created by Matt Sommer on 6/14/16.
  */
 public class GridViewHolder {
     public final ImageView iconView;

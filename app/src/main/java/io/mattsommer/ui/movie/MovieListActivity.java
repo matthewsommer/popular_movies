@@ -1,4 +1,4 @@
-package io.mattsommer.popularmovies;
+package io.mattsommer.ui.movie;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,14 +9,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import io.mattsommer.popularmovies.R;
+import io.mattsommer.ui.settings.SettingsActivity;
+
 /**
- * MainActivity.java Initial activity used by intent 'android.intent.action.MAIN' specified in
+ * MovieListActivity.java Initial activity used by intent 'android.intent.action.MAIN' specified in
  * AndroidManifest.xml
  * @author Matt Sommer
  */
-public class MainActivity extends AppCompatActivity {
+public class MovieListActivity extends AppCompatActivity {
 
-    private final String LOG_TAG = MainActivity.class.getSimpleName();
+    private final String LOG_TAG = MovieListActivity.class.getSimpleName();
 
     /**
      * Called when activity is starting
@@ -58,9 +61,9 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         if (sharedPref.getString("sort", "").matches("popularity")) {
-            setTitle(getString(R.string.title_recent_popular));
+            setTitle(getString(R.string.recent_popular));
         } else {
-            setTitle(getString(R.string.title_all_time_popular));
+            setTitle(getString(R.string.all_time_popular));
         }
     }
 
@@ -91,6 +94,14 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
+        if (id == R.id.action_sort_popular) {
+
+        }
+
+        if (id == R.id.action_sort_recent) {
+
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }

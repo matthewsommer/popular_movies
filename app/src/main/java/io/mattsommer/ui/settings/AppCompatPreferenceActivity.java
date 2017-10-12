@@ -1,4 +1,4 @@
-package io.mattsommer.popularmovies;
+package io.mattsommer.ui.settings;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

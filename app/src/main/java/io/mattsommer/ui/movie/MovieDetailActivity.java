@@ -1,4 +1,4 @@
-package io.mattsommer.popularmovies;
+package io.mattsommer.ui.movie;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import io.mattsommer.data.model.Movie;
+import io.mattsommer.popularmovies.R;
+import io.mattsommer.ui.settings.SettingsActivity;
 
 public class MovieDetailActivity extends AppCompatActivity {
 

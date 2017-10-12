@@ -1,4 +1,4 @@
-package io.mattsommer.popularmovies;
+package io.mattsommer.ui.movie;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.mattsommer.data.model.Movie;
+import io.mattsommer.popularmovies.BuildConfig;
+import io.mattsommer.popularmovies.R;
 
 public class MovieFragment extends Fragment {
 

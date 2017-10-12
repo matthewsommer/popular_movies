@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity">
+    tools:context="io.mattsommer.ui.movie.MovieListActivity">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
@@ -10,11 +10,11 @@
     <item
         android:id="@+id/action_sort_popular"
         android:orderInCategory="101"
-        android:title="@string/action_sort_popular"
+        android:title="@string/all_time_popular"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_sort_recent"
         android:orderInCategory="102"
-        android:title="@string/action_sort_recent"
+        android:title="@string/recent_popular"
         app:showAsAction="never" />
 </menu>

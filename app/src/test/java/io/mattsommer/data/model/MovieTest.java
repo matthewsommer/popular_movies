@@ -2,6 +2,7 @@ package io.mattsommer.data.model;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**
@@ -20,16 +21,6 @@ public class MovieTest {
     @Before
     public void setUp() {
         movie = new Movie(id,original_title,release_date,poster_path,vote_average,overview);
-    }
-
-    @Test
-    public void describeContents() throws Exception {
-
-    }
-
-    @Test
-    public void writeToParcel() throws Exception {
-
     }
 
     @Test
