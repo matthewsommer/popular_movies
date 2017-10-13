@@ -1,7 +1,10 @@
 package io.mattsommer.ui.movie;
 
+import static io.mattsommer.data.contract.MovieContract.SORT.RATING;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import io.mattsommer.data.contract.MovieContract.SORT;
 import io.mattsommer.networking.FetchMovies;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,6 +86,11 @@ public class MovieFragment extends Fragment {
     updateMovies();
   }
 
+  @Override
+  public void onPause() {
+    super.onPause();
+  }
+
   public class FetchMoviesTask extends AsyncTask<Void, Void, List<Movie>> {
 
     private final String LOG_TAG = FetchMoviesTask.class.getSimpleName();
@@ -121,10 +130,11 @@ public class MovieFragment extends Fragment {
     protected List<Movie> doInBackground(Void... params) {
 
       SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-      String sortValue = preferences.getString("sort", "");
+      int storedInt = preferences.getInt("sortId",0);
+      SORT sortValueEnum = SORT.fromInteger(storedInt);
 
       try {
-        return getMovieDataFromJson(FetchMovies.Fetch(sortValue));
+        return getMovieDataFromJson(FetchMovies.Fetch(sortValueEnum));
       } catch (JSONException e) {
         Log.e(LOG_TAG, e.getMessage(), e);
         e.printStackTrace();

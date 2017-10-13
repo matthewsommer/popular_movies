@@ -10,11 +10,11 @@
     <item
         android:id="@+id/action_sort_popular"
         android:orderInCategory="101"
-        android:title="@string/all_time_popular"
+        android:title="@string/recent_popular"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_sort_recent"
+        android:id="@+id/action_sort_rating"
         android:orderInCategory="102"
-        android:title="@string/recent_popular"
+        android:title="@string/all_time_rating"
         app:showAsAction="never" />
 </menu>

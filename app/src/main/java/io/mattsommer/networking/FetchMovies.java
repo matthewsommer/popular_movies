@@ -1,8 +1,12 @@
 package io.mattsommer.networking;
 
+import static io.mattsommer.data.contract.MovieContract.SORT.POPULARITY;
+import static io.mattsommer.data.contract.MovieContract.SORT.RATING;
+
 import android.net.Uri;
 import android.util.Log;
 import io.mattsommer.data.contract.MovieContract;
+import io.mattsommer.data.contract.MovieContract.SORT;
 import io.mattsommer.popularmovies.BuildConfig;
 import io.mattsommer.ui.movie.MovieFragment.FetchMoviesTask;
 import java.io.BufferedReader;
@@ -20,32 +24,38 @@ public class FetchMovies {
 
   private static final String LOG_TAG = FetchMoviesTask.class.getSimpleName();
 
-  public static String Fetch(String sortPreference) {
+  public static String Fetch(SORT sortValueEnum) {
     HttpURLConnection urlConnection = null;
     BufferedReader reader = null;
-
     String JsonResponseStr = null;
-    Uri builtUri;
+
+    Uri.Builder builder = new Uri.Builder();
+    builder.scheme(MovieContract.SCHEME);
+    builder.authority(MovieContract.CONTENT_AUTHORITY);
+    builder.appendPath(MovieContract.MDB_API_VERSION);
+    builder.appendPath(MovieContract.MDB_PATH);
 
     try {
-      String sortValue = sortPreference;
-
-      if (sortValue.equalsIgnoreCase(MovieContract.MDB_POPULARITY)) {
-        builtUri = Uri.parse(MovieContract.MDB_BASE_URL).buildUpon()
-            .appendPath(MovieContract.MDB_POPULAR)
-            .appendQueryParameter(MovieContract.APP_ID_PARAM, BuildConfig.MOVIE_DB_API_KEY)
-            .build();
-      } else if (sortValue.equalsIgnoreCase(MovieContract.MDB_RATING)) {
-        builtUri = Uri.parse(MovieContract.MDB_BASE_URL).buildUpon()
-            .appendPath(MovieContract.MDB_TOP_RATED)
-            .appendQueryParameter(MovieContract.APP_ID_PARAM, BuildConfig.MOVIE_DB_API_KEY)
-            .build();
-      } else {
-        Log.e(LOG_TAG, Error.SORT_PREFERENCE.toString());
-        return null;
+      switch (sortValueEnum) {
+        case RATING:
+          Log.i(LOG_TAG, "Sorting by all-time rating.");
+          builder.appendPath(RATING.getDescription());
+          break;
+        case POPULARITY:
+          Log.i(LOG_TAG, "Sorting by popularity.");
+          builder.appendPath(POPULARITY.getDescription());
+          break;
+        default:
+          Log.e(LOG_TAG, "Sort preference not set. Defaulting to popularity.");
+          builder.appendPath(POPULARITY.getDescription());
+          break;
       }
 
-      URL url = new URL(builtUri.toString());
+      builder.appendQueryParameter(MovieContract.APP_ID_PARAM, BuildConfig.MOVIE_DB_API_KEY);
+
+      String urlStr = builder.build().toString();
+      Log.i(LOG_TAG, urlStr);
+      URL url = new URL(urlStr);
 
       urlConnection = (HttpURLConnection) url.openConnection();
       urlConnection.setRequestMethod("GET");
