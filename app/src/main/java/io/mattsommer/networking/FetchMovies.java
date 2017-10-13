@@ -2,6 +2,7 @@ package io.mattsommer.networking;
 
 import android.net.Uri;
 import android.util.Log;
+import io.mattsommer.data.contract.MovieContract;
 import io.mattsommer.popularmovies.BuildConfig;
 import io.mattsommer.ui.movie.MovieFragment.FetchMoviesTask;
 import java.io.BufferedReader;
@@ -24,32 +25,23 @@ public class FetchMovies {
     BufferedReader reader = null;
 
     String JsonResponseStr = null;
-    Uri builtUri = null;
-
-    final String APPID_PARAM = "api_key";
+    Uri builtUri;
 
     try {
-      final String MDB_BASE_URL =
-          "http://api.themoviedb.org/3/movie";
-      final String MDB_POPULAR = "popular";
-      final String MDB_TOP_RATED = "top_rated";
+      String sortValue = sortPreference;
 
-      //TODO: Reimplement preference option
-      //SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-      String sortValue = sortPreference; //preferences.getString("sort", "");
-
-      if (sortValue.equalsIgnoreCase("popularity")) {
-        builtUri = Uri.parse(MDB_BASE_URL).buildUpon()
-            .appendPath(MDB_POPULAR)
-            .appendQueryParameter(APPID_PARAM, BuildConfig.MOVIE_DB_API_KEY)
+      if (sortValue.equalsIgnoreCase(MovieContract.MDB_POPULARITY)) {
+        builtUri = Uri.parse(MovieContract.MDB_BASE_URL).buildUpon()
+            .appendPath(MovieContract.MDB_POPULAR)
+            .appendQueryParameter(MovieContract.APP_ID_PARAM, BuildConfig.MOVIE_DB_API_KEY)
             .build();
-      } else if (sortValue.equalsIgnoreCase("rating")) {
-        builtUri = Uri.parse(MDB_BASE_URL).buildUpon()
-            .appendPath(MDB_TOP_RATED)
-            .appendQueryParameter(APPID_PARAM, BuildConfig.MOVIE_DB_API_KEY)
+      } else if (sortValue.equalsIgnoreCase(MovieContract.MDB_RATING)) {
+        builtUri = Uri.parse(MovieContract.MDB_BASE_URL).buildUpon()
+            .appendPath(MovieContract.MDB_TOP_RATED)
+            .appendQueryParameter(MovieContract.APP_ID_PARAM, BuildConfig.MOVIE_DB_API_KEY)
             .build();
       } else {
-        Log.e("Error ", "Sort preference not set properly");
+        Log.e(LOG_TAG, Error.SORT_PREFERENCE.toString());
         return null;
       }
 
@@ -86,7 +78,7 @@ public class FetchMovies {
         try {
           reader.close();
         } catch (final IOException e) {
-          Log.e(LOG_TAG, "Error closing stream", e);
+          Log.e(LOG_TAG, Error.STREAM.toString(), e);
         }
       }
     }

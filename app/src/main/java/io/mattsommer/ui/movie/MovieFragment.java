@@ -44,13 +44,12 @@ public class MovieFragment extends Fragment {
   }
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
     mMovieAdapter = new MovieAdapter(getActivity(), new ArrayList<Movie>());
 
-    GridView gridview = (GridView) rootView.findViewById(R.id.gridview_movie);
+    GridView gridview = rootView.findViewById(R.id.gridview_movie);
     gridview.setAdapter(mMovieAdapter);
 
     gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -74,7 +73,7 @@ public class MovieFragment extends Fragment {
   @Override
   public void onStart() {
     super.onStart();
-
+    updateMovies();
   }
 
   @Override
@@ -123,7 +122,7 @@ public class MovieFragment extends Fragment {
 
       SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
       String sortValue = preferences.getString("sort", "");
-      
+
       try {
         return getMovieDataFromJson(FetchMovies.Fetch(sortValue));
       } catch (JSONException e) {
