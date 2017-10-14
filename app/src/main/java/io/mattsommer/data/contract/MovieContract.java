@@ -1,9 +1,8 @@
 package io.mattsommer.data.contract;
 
-import android.net.Uri;
-
 /**
- * Created by matt on 10/12/17.
+ * Contract with The Movie DB for accessing data
+ * Created by matt on 10/12/17
  */
 
 public class MovieContract {
