@@ -15,7 +15,6 @@ import com.squareup.picasso.Picasso;
 
 import io.mattsommer.data.model.Movie;
 import io.mattsommer.popularmovies.R;
-import io.mattsommer.ui.settings.SettingsActivity;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
@@ -63,7 +62,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
             Intent intent = getActivity().getIntent();
             if (intent != null && intent.hasExtra("Movie")) {
-                movie = (Movie)intent.getParcelableExtra("Movie");
+                movie = intent.getParcelableExtra("Movie");
                 ((TextView) rootView.findViewById(R.id.detail_text))
                         .setText(movie.getOriginal_title());
                 ((TextView) rootView.findViewById(R.id.detail_release_date))
@@ -73,7 +72,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 ((TextView) rootView.findViewById(R.id.detail_overview))
                         .setText(movie.getOverview());
 
-                ImageView iconView = (ImageView) rootView.findViewById(R.id.list_item_icon);
+                ImageView iconView = rootView.findViewById(R.id.list_item_icon);
                 Picasso.with(getContext()).load("http://image.tmdb.org/t/p/w185/"+movie.getPoster_path()).into(iconView);
             }
 

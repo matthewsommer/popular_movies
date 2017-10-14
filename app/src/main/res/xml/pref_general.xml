@@ -3,9 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ListPreference
-        android:title="@string/pref_sort_order_label"
         android:key="@string/pref_sort_order_key"
-        android:defaultValue="@string/pref_sort_order_popularity"
+        android:defaultValue="@string/pref_sort_order_recent"
         android:entryValues="@array/pref_sort_order_values"
         android:entries="@array/pref_sort_order_options" />
 </PreferenceScreen>

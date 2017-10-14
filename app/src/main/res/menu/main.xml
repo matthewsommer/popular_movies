@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_sort_popular"
         android:orderInCategory="101"
-        android:title="@string/recent_popular"
+        android:title="@string/recently_popular"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_sort_rating"

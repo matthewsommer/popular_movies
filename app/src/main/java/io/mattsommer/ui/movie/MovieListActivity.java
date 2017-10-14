@@ -1,8 +1,8 @@
 package io.mattsommer.ui.movie;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import io.mattsommer.popularmovies.R;
-import io.mattsommer.ui.settings.SettingsActivity;
 
 /**
  * MovieListActivity.java Initial activity used by intent 'android.intent.action.MAIN' specified in
@@ -57,14 +56,22 @@ public class MovieListActivity extends AppCompatActivity {
   @Override
   public void onStart() {
 
-    // When overriding onStart you must call through to superclass implementation
+    // Must call superclass implementation
     super.onStart();
+
+    // Retrieve preferences to set the sort method
     SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-    if (sharedPref.getString("sort", "").matches("popularity")) {
-      setTitle(getString(R.string.recent_popular));
+
+    Resources res = getResources();
+    String sortPrefKey = res.getString(R.string.pref_sort_order_key);
+
+
+    if (sharedPref.getString(sortPrefKey, "").matches(res.getString(R.string.pref_sort_order_recent))) {
+      setTitle(getString(R.string.recently_popular));
     } else {
       setTitle(getString(R.string.all_time_rating));
     }
+
   }
 
   /**
@@ -98,7 +105,7 @@ public class MovieListActivity extends AppCompatActivity {
       editor.putInt("sortId", 1); // value to store
     }
 
-    editor.commit();
+    editor.apply();
 
     Intent intent = getIntent();
     finish();
