@@ -3,6 +3,9 @@
   <!-- Name of this application -->
   <string name="app_name">Popular Movies</string>
 
+  <!-- Movie description strings -->
+  <string name="movie_release_date">Released %1$s</string>
+  <string name="movie_vote_average">Vote average %1$s</string>
 
   <!-- Strings used for preferences -->
   <!-- Title for recently popular movies -->

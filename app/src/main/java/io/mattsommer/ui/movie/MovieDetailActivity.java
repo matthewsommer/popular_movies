@@ -1,6 +1,7 @@
 package io.mattsommer.ui.movie;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -18,65 +19,54 @@ import io.mattsommer.popularmovies.R;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_detail);
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new DetailFragment())
-                    .commit();
-        }
+    if (savedInstanceState == null) {
+      getSupportFragmentManager().beginTransaction()
+          .add(R.id.container, new DetailFragment())
+          .commit();
+    }
+  }
+
+  public static class DetailFragment extends Fragment {
+
+    private static final String LOG_TAG = DetailFragment.class.getSimpleName();
+    private Movie movie;
+
+    public DetailFragment() {
+      setHasOptionsMenu(true);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+        Bundle savedInstanceState) {
+
+      View rootView = inflater.inflate(R.layout.movie_detail, container, false);
+
+      Resources res = getResources();
+      String releaseDate = res.getString(R.string.movie_release_date, movie.getRelease_date());
+      String voteAverage = res.getString(R.string.movie_vote_average, movie.getVote_average());
+
+      Intent intent = getActivity().getIntent();
+      if (intent != null && intent.hasExtra("Movie")) {
+        movie = intent.getParcelableExtra("Movie");
+        ((TextView) rootView.findViewById(R.id.detail_text))
+            .setText(movie.getOriginal_title());
+        ((TextView) rootView.findViewById(R.id.detail_release_date))
+            .setText(releaseDate);
+        ((TextView) rootView.findViewById(R.id.detail_vote_average))
+            .setText(voteAverage);
+        ((TextView) rootView.findViewById(R.id.detail_overview))
+            .setText(movie.getOverview());
+
+        ImageView iconView = rootView.findViewById(R.id.list_item_icon);
+        Picasso.with(getContext()).load("http://image.tmdb.org/t/p/w185/" + movie.getPoster_path()).into(iconView);
+      }
+
+      return rootView;
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//        if (id == R.id.action_settings) {
-//            startActivity(new Intent(this, SettingsActivity.class));
-//            return true;
-//        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    public static class DetailFragment extends Fragment {
-        private static final String LOG_TAG = DetailFragment.class.getSimpleName();
-        private Movie movie;
-
-        public DetailFragment() {
-            setHasOptionsMenu(true);
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-
-            View rootView = inflater.inflate(R.layout.movie_detail, container, false);
-
-            Intent intent = getActivity().getIntent();
-            if (intent != null && intent.hasExtra("Movie")) {
-                movie = intent.getParcelableExtra("Movie");
-                ((TextView) rootView.findViewById(R.id.detail_text))
-                        .setText(movie.getOriginal_title());
-                ((TextView) rootView.findViewById(R.id.detail_release_date))
-                        .setText("Released " + movie.getRelease_date());
-                ((TextView) rootView.findViewById(R.id.detail_vote_average))
-                        .setText("Vote average " + movie.getVote_average());
-                ((TextView) rootView.findViewById(R.id.detail_overview))
-                        .setText(movie.getOverview());
-
-                ImageView iconView = rootView.findViewById(R.id.list_item_icon);
-                Picasso.with(getContext()).load("http://image.tmdb.org/t/p/w185/"+movie.getPoster_path()).into(iconView);
-            }
-
-            return rootView;
-        }
-    }
+  }
 }
