@@ -1,2 +1,9 @@
-# Project 1: Popular Movies Stage 1 - Udacity Android Nanodegree
-Simple app to show popular and top rated movies
+# Popular Movies - Simple Android Mobile Application
+
+This source repository is an example Android mobile device application to
+demonstrate simple Android development principles.
+
+* Activities
+* Fragments
+* Preferences (user settings)
+* JSON data consumption
