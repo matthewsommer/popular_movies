@@ -1,11 +1,12 @@
 package io.mattsommer.networking;
 
 /**
+ * Errors class for networking
  * Created by matt on 10/12/17.
  */
 
-public enum Error {
-  SORT_PREFERENCE(0, "Sort preference not set properly."),
+enum Error {
+  SORT_PREFERENCE(0, "SortPreference preference not set properly."),
   STREAM(1, "Error closing stream.");
 
   private final int code;

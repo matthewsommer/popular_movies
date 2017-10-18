@@ -17,6 +17,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
+ * Network class for fetching movies
  * Created by matt on 10/12/17.
  */
 
@@ -46,7 +47,7 @@ public class FetchMovies {
           builder.appendPath(POPULARITY.getDescription());
           break;
         default:
-          Log.e(LOG_TAG, "Sort preference not set. Defaulting to popularity.");
+          Log.e(LOG_TAG, "SortPreference preference not set. Defaulting to popularity.");
           builder.appendPath(POPULARITY.getDescription());
           break;
       }
@@ -62,7 +63,7 @@ public class FetchMovies {
       urlConnection.connect();
 
       InputStream inputStream = urlConnection.getInputStream();
-      StringBuffer buffer = new StringBuffer();
+      StringBuilder stringBuilder = new StringBuilder();
       if (inputStream == null) {
         return null;
       }
@@ -70,13 +71,13 @@ public class FetchMovies {
 
       String line;
       while ((line = reader.readLine()) != null) {
-        buffer.append(line + "\n");
+        stringBuilder.append(line).append("\n");
       }
 
-      if (buffer.length() == 0) {
+      if (stringBuilder.length() == 0) {
         return null;
       }
-      JsonResponseStr = buffer.toString();
+      JsonResponseStr = stringBuilder.toString();
     } catch (IOException e) {
       Log.e(LOG_TAG, "Error ", e);
       return null;

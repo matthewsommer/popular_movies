@@ -1,16 +1,14 @@
 package io.mattsommer.ui.movie;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import io.mattsommer.data.contract.MovieContract.SORT;
 import io.mattsommer.popularmovies.R;
+import io.mattsommer.user.preferences.SortPreference;
 
 /**
  * MovieListActivity.java Initial activity used by intent 'android.intent.action.MAIN' specified in
@@ -59,7 +57,7 @@ public class MovieListActivity extends AppCompatActivity {
     // Must call superclass implementation
     super.onStart();
 
-    setTitle();
+    setTitle(SortPreference.getText(this));
   }
 
   /**
@@ -80,50 +78,25 @@ public class MovieListActivity extends AppCompatActivity {
    */
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    setSortPreference(item);
-    setTitle();
-    updateFragment();
-    return super.onOptionsItemSelected(item);
-  }
 
-  private void updateFragment() {
+    // Set sort preference based on menu item selected
+    if (item.getItemId() == R.id.action_sort_popular) {
+      SortPreference.setPreference(this, SORT.POPULARITY.getCode());
+    } else if (item.getItemId() == R.id.action_sort_rating) {
+      SortPreference.setPreference(this, SORT.RATING.getCode());
+    }
+
+    // Set title in action bar
+    setTitle(SortPreference.getText(this));
+
+    // Retrieve fragment to update movies
     MovieFragment movieFragment = (MovieFragment) getSupportFragmentManager().findFragmentById(R.id.container);
 
+    // If fragment isn't null call update movies method
     if (movieFragment != null) {
       movieFragment.updateMovies();
     }
-  }
 
-  private void setSortPreference(MenuItem item) {
-    int menuItemId = item.getItemId();
-
-    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-    SharedPreferences.Editor editor = preferences.edit();
-    Resources res = getResources();
-    String sortPrefKey = res.getString(R.string.pref_sort_order_key);
-    if (menuItemId == R.id.action_sort_popular) {
-      editor.putInt(sortPrefKey, 0); // value to store
-    }
-
-    if (menuItemId == R.id.action_sort_rating) {
-      editor.putInt(sortPrefKey, 1); // value to store
-    }
-
-    editor.commit();
-  }
-
-  private void setTitle() {
-    // Retrieve preferences to set the sort method
-    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-
-    Resources res = getResources();
-    String sortPrefKey = res.getString(R.string.pref_sort_order_key);
-
-    if (sharedPref.getInt(sortPrefKey,0) == 0) {
-      setTitle(getString(R.string.recently_popular));
-    } else {
-      setTitle(getString(R.string.all_time_rating));
-    }
+    return super.onOptionsItemSelected(item);
   }
 }

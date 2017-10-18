@@ -1,12 +1,8 @@
 package io.mattsommer.ui.movie;
 
-import static io.mattsommer.data.contract.MovieContract.SORT.RATING;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -23,20 +19,15 @@ import io.mattsommer.networking.FetchMovies;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.mattsommer.data.model.Movie;
-import io.mattsommer.popularmovies.BuildConfig;
 import io.mattsommer.popularmovies.R;
 
 public class MovieFragment extends Fragment {
+
+  private final String LOG_TAG = MovieFragment.class.getSimpleName();
 
   private MovieAdapter mMovieAdapter;
 
@@ -70,11 +61,6 @@ public class MovieFragment extends Fragment {
     return rootView;
   }
 
-  public void updateMovies() {
-    FetchMoviesTask moviesTask = new FetchMoviesTask();
-    moviesTask.execute();
-  }
-
   @Override
   public void onStart() {
     super.onStart();
@@ -90,6 +76,12 @@ public class MovieFragment extends Fragment {
   @Override
   public void onPause() {
     super.onPause();
+  }
+
+  public void updateMovies() {
+    Log.i(LOG_TAG, "Entry updating movies");
+    FetchMoviesTask moviesTask = new FetchMoviesTask();
+    moviesTask.execute();
   }
 
   public class FetchMoviesTask extends AsyncTask<Void, Void, List<Movie>> {
@@ -110,7 +102,7 @@ public class MovieFragment extends Fragment {
       JSONObject moviesJson = new JSONObject(moviesJsonStr);
       JSONArray moviesArray = moviesJson.getJSONArray(MDB_RESULTS);
 
-      List<Movie> movies = new ArrayList<Movie>();
+      List<Movie> movies = new ArrayList<>();
 
       for (int i = 0; i < moviesArray.length(); i++) {
         JSONObject movieObject = moviesArray.getJSONObject(i);
