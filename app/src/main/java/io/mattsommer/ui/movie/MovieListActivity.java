@@ -59,19 +59,7 @@ public class MovieListActivity extends AppCompatActivity {
     // Must call superclass implementation
     super.onStart();
 
-    // Retrieve preferences to set the sort method
-    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-
-    Resources res = getResources();
-    String sortPrefKey = res.getString(R.string.pref_sort_order_key);
-
-
-    if (sharedPref.getString(sortPrefKey, "").matches(res.getString(R.string.pref_sort_order_recent))) {
-      setTitle(getString(R.string.recently_popular));
-    } else {
-      setTitle(getString(R.string.all_time_rating));
-    }
-
+    setTitle();
   }
 
   /**
@@ -92,25 +80,50 @@ public class MovieListActivity extends AppCompatActivity {
    */
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
+    setSortPreference(item);
+    setTitle();
+    updateFragment();
+    return super.onOptionsItemSelected(item);
+  }
+
+  private void updateFragment() {
+    MovieFragment movieFragment = (MovieFragment) getSupportFragmentManager().findFragmentById(R.id.container);
+
+    if (movieFragment != null) {
+      movieFragment.updateMovies();
+    }
+  }
+
+  private void setSortPreference(MenuItem item) {
     int menuItemId = item.getItemId();
+
     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
     SharedPreferences.Editor editor = preferences.edit();
-
+    Resources res = getResources();
+    String sortPrefKey = res.getString(R.string.pref_sort_order_key);
     if (menuItemId == R.id.action_sort_popular) {
-      editor.putInt("sortId", 0); // value to store
+      editor.putInt(sortPrefKey, 0); // value to store
     }
 
     if (menuItemId == R.id.action_sort_rating) {
-      editor.putInt("sortId", 1); // value to store
+      editor.putInt(sortPrefKey, 1); // value to store
     }
 
-    editor.apply();
+    editor.commit();
+  }
 
-    Intent intent = getIntent();
-    finish();
-    startActivity(intent);
+  private void setTitle() {
+    // Retrieve preferences to set the sort method
+    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
-    return super.onOptionsItemSelected(item);
+    Resources res = getResources();
+    String sortPrefKey = res.getString(R.string.pref_sort_order_key);
+
+    if (sharedPref.getInt(sortPrefKey,0) == 0) {
+      setTitle(getString(R.string.recently_popular));
+    } else {
+      setTitle(getString(R.string.all_time_rating));
+    }
   }
 }

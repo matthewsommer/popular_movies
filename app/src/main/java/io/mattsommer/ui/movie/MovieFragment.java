@@ -5,6 +5,7 @@ import static io.mattsommer.data.contract.MovieContract.SORT.RATING;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -69,7 +70,7 @@ public class MovieFragment extends Fragment {
     return rootView;
   }
 
-  private void updateMovies() {
+  public void updateMovies() {
     FetchMoviesTask moviesTask = new FetchMoviesTask();
     moviesTask.execute();
   }
@@ -130,7 +131,9 @@ public class MovieFragment extends Fragment {
     protected List<Movie> doInBackground(Void... params) {
 
       SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-      int storedInt = preferences.getInt("sortId",0);
+      Resources res = getResources();
+      String sortPrefKey = res.getString(R.string.pref_sort_order_key);
+      int storedInt = preferences.getInt(sortPrefKey,0);
       SORT sortValueEnum = SORT.fromInteger(storedInt);
 
       try {

@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,6 +16,16 @@ import io.mattsommer.data.model.Movie;
 import io.mattsommer.popularmovies.R;
 
 public class MovieDetailActivity extends AppCompatActivity {
+
+  //TODO: use different image sizes "poster_sizes": [
+    //  "w92",
+    //      "w154",
+    //      "w185",
+    //      "w342",
+    //      "w500",
+    //      "w780",
+    //      "original"
+    //      ],
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +54,12 @@ public class MovieDetailActivity extends AppCompatActivity {
 
       View rootView = inflater.inflate(R.layout.movie_detail, container, false);
 
-      Resources res = getResources();
-      String releaseDate = res.getString(R.string.movie_release_date, movie.getRelease_date());
-      String voteAverage = res.getString(R.string.movie_vote_average, movie.getVote_average());
-
       Intent intent = getActivity().getIntent();
       if (intent != null && intent.hasExtra("Movie")) {
         movie = intent.getParcelableExtra("Movie");
+        Resources res = getResources();
+        String releaseDate = res.getString(R.string.movie_release_date, movie.getRelease_date());
+        String voteAverage = res.getString(R.string.movie_vote_average, movie.getVote_average());
         ((TextView) rootView.findViewById(R.id.detail_text))
             .setText(movie.getOriginal_title());
         ((TextView) rootView.findViewById(R.id.detail_release_date))
