@@ -31,7 +31,7 @@ gradle-app.setting
 
 # Gradle files
 .gradle
-/build/
+build/
 gradle.properties
 
 # Ignore Gradle GUI config
