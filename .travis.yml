@@ -2,34 +2,38 @@ language: android
 jdk: oraclejdk8
 sudo: false
 
+env:
+ global:
+    - ANDROID_API_LEVEL=25
+    - ANDROID_BUILD_TOOLS_VERSION=26.0.2
+
 android:
   components:
     - tools
     - platform-tools
-    - tools
-
-    # The BuildTools version used by your project
-    - build-tools-26.0.2
-
-    # The SDK version used to compile your project
-    - android-25
-
+    - tools #There's some bug so tools has to be listed twice....todo:fix this
+    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+    - android-$ANDROID_API_LEVEL
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - addon-google_apis-google-$ANDROID_API_LEVEL
     # Specify at least one system image,
     # if you need to run emulator(s) during your tests
     - sys-img-armeabi-v7a-google_apis-25
     - sys-img-armeabi-v7a-android-25
-  script:
-    - ./gradlew build connectedCheck
   licenses:
+    - 'android-sdk-preview-license-.+'
     - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
 
 before_install:
-- mkdir "$ANDROID_HOME/licenses" || true
+  - mkdir -p "$ANDROID_HOME/licenses"
+  - cp ./google-licenses/* "$ANDROID_HOME/licenses/"
 
 before_script:
-  # Create and start emulator
   - echo no | android create avd --force -n test -t android-25 --abi google_apis/armeabi-v7a
-  - emulator -avd test -noaudio -no-window &
+  - emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
 
@@ -42,4 +46,5 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cachegit st
 
-script: ./gradlew connectedAndroidTest
+script:
+    - ./gradlew build check
