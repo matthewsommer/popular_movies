@@ -32,7 +32,8 @@ android {
         }
     }
     buildTypes.each {
-        it.buildConfigField 'String', 'MOVIE_DB_API_KEY', MyMovieDBApiKey
+        def MOVIE_DB_API_KEY = System.getenv().MOVIE_DB_API_KEY
+        it.buildConfigField 'String', 'MOVIE_DB_API_KEY', "\"" + MOVIE_DB_API_KEY + "\""
     }
 }
 
