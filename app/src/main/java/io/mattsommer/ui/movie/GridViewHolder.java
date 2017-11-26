@@ -14,6 +14,6 @@ public class GridViewHolder {
   public final ImageView iconView;
 
   public GridViewHolder(View view) {
-    iconView = view.findViewById(R.id.list_item_icon);
+    iconView = (ImageView) view.findViewById(R.id.list_item_icon);
   }
 }

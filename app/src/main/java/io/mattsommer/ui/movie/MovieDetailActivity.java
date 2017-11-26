@@ -69,7 +69,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         ((TextView) rootView.findViewById(R.id.detail_overview))
             .setText(movie.getOverview());
 
-        ImageView iconView = rootView.findViewById(R.id.list_item_icon);
+        ImageView iconView = (ImageView) rootView.findViewById(R.id.list_item_icon);
         Picasso.with(getContext()).load("http://image.tmdb.org/t/p/w185/" + movie.getPoster_path()).into(iconView);
       }
 

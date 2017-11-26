@@ -45,7 +45,7 @@ public class MovieFragment extends Fragment {
 
     mMovieAdapter = new MovieAdapter(getActivity(), new ArrayList<Movie>());
 
-    GridView gridview = rootView.findViewById(R.id.gridview_movie);
+    GridView gridview = (GridView) rootView.findViewById(R.id.gridview_movie);
     gridview.setAdapter(mMovieAdapter);
 
     gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
