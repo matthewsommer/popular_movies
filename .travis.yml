@@ -25,19 +25,18 @@ android:
 env:
   global:
     - DIR=constraint-layout-start # Project directory
-    - API=25 # Android API level 25 by default
+    - API=26 # Android API level 25 by default
     - TAG=google_apis # Google APIs by default, alternatively use default
     - ABI=armeabi-v7a # ARM ABI v7a by default
     - QEMU_AUDIO_DRV=none # Disable emulator audio to avoid warning
     - GRADLE_USER_HOME="${TRAVIS_BUILD_DIR}/gradle" # Change location for Gradle Wrapper and cache
-    - ANDROID_HOME=/usr/local/android-sdk-24.0.2 # Depends on the cookbooks version used in the VM
+    - ANDROID_HOME=/usr/local/android-sdk-26.1.0 # Depends on the cookbooks version used in the VM
     - TOOLS=${ANDROID_HOME}/tools # PATH order matters, exists more than one emulator script
     - PATH=${ANDROID_HOME}:${ANDROID_HOME}/emulator:${TOOLS}:${TOOLS}/bin:${ANDROID_HOME}/platform-tools:${PATH}
     - ADB_INSTALL_TIMEOUT=20 # minutes (2 minutes by default)
 
 matrix:
   include: # More Emulator API levels to build in parallel
-    - env: API=24
   fast_finish: false
 
 before_install:
