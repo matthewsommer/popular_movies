@@ -16,6 +16,6 @@ public class ApplicationTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("io.mattsommer.popularmovies", appContext.getPackageName());
+        assertEquals("io.mattsommer.udacity.android.example", appContext.getPackageName());
     }
 }
