@@ -3,7 +3,7 @@ package io.mattsommer.ui.movie;
 import android.view.View;
 import android.widget.ImageView;
 
-import io.mattsommer.popularmovies.R;
+import io.mattsommer.udacity.android.example.R;
 
 /**
  * Holder class for gridview to speed up scrolling

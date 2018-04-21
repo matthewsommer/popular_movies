@@ -7,7 +7,7 @@ import android.net.Uri;
 import android.util.Log;
 import io.mattsommer.data.contract.MovieContract;
 import io.mattsommer.data.contract.MovieContract.SORT;
-import io.mattsommer.popularmovies.BuildConfig;
+import io.mattsommer.udacity.android.example.BuildConfig;
 import io.mattsommer.ui.movie.MovieFragment.FetchMoviesTask;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,8 +17,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Network class for fetching movies
- * Created by matt on 10/12/17.
+ * Network class for fetching movies Created by matt on 10/12/17.
  */
 
 public class FetchMovies {

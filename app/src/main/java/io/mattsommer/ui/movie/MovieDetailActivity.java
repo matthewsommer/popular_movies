@@ -11,21 +11,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
-
 import io.mattsommer.data.model.Movie;
-import io.mattsommer.popularmovies.R;
+import io.mattsommer.udacity.android.example.R;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
   //TODO: use different image sizes "poster_sizes": [
-    //  "w92",
-    //      "w154",
-    //      "w185",
-    //      "w342",
-    //      "w500",
-    //      "w780",
-    //      "original"
-    //      ],
+  //  "w92",
+  //      "w154",
+  //      "w185",
+  //      "w342",
+  //      "w500",
+  //      "w780",
+  //      "original"
+  //      ],
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +69,8 @@ public class MovieDetailActivity extends AppCompatActivity {
             .setText(movie.getOverview());
 
         ImageView iconView = (ImageView) rootView.findViewById(R.id.list_item_icon);
-        Picasso.with(getContext()).load("http://image.tmdb.org/t/p/w185/" + movie.getPoster_path()).into(iconView);
+        Picasso.with(getContext()).load("http://image.tmdb.org/t/p/w185/" + movie.getPoster_path())
+            .into(iconView);
       }
 
       return rootView;

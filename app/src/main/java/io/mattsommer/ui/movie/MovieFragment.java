@@ -13,17 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-
 import io.mattsommer.data.contract.MovieContract.SORT;
+import io.mattsommer.data.model.Movie;
 import io.mattsommer.networking.FetchMovies;
+import io.mattsommer.udacity.android.example.R;
+import java.util.ArrayList;
+import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.util.ArrayList;
-import java.util.List;
-
-import io.mattsommer.data.model.Movie;
-import io.mattsommer.popularmovies.R;
 
 public class MovieFragment extends Fragment {
 
@@ -40,7 +38,8 @@ public class MovieFragment extends Fragment {
   }
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+      Bundle savedInstanceState) {
     View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
     mMovieAdapter = new MovieAdapter(getActivity(), new ArrayList<Movie>());
@@ -125,7 +124,7 @@ public class MovieFragment extends Fragment {
       SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
       Resources res = getResources();
       String sortPrefKey = res.getString(R.string.pref_sort_order_key);
-      int storedInt = preferences.getInt(sortPrefKey,0);
+      int storedInt = preferences.getInt(sortPrefKey, 0);
       SORT sortValueEnum = SORT.fromInteger(storedInt);
 
       try {

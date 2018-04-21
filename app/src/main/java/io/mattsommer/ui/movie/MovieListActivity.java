@@ -1,13 +1,12 @@
 package io.mattsommer.ui.movie;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import io.mattsommer.data.contract.MovieContract.SORT;
-import io.mattsommer.popularmovies.R;
+import io.mattsommer.udacity.android.example.R;
 import io.mattsommer.user.preferences.SortPreference;
 
 /**
@@ -21,11 +20,11 @@ public class MovieListActivity extends AppCompatActivity {
   private final String LOG_TAG = MovieListActivity.class.getSimpleName();
 
   /**
-   * Called when activity is starting
-   * https://developer.android.com/reference/android/app/Activity.html#onCreate(android.os.Bundle)
+   * Called when activity is starting https://developer.android.com/reference/android/app/Activity.html#onCreate(android.os.Bundle)
    *
-   * @param savedInstanceState Bundle: If the activity is being re-initialized after previously being shut down then this Bundle contains the data it
-   * most recently supplied in onSaveInstanceState(Bundle). Note: Otherwise it is null.
+   * @param savedInstanceState Bundle: If the activity is being re-initialized after previously
+   * being shut down then this Bundle contains the data it most recently supplied in
+   * onSaveInstanceState(Bundle). Note: Otherwise it is null.
    */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +47,8 @@ public class MovieListActivity extends AppCompatActivity {
   }
 
   /**
-   * Called after onCreate(Bundle) — or after onRestart() when the activity had been
-   * stopped, but is now again being displayed to the user. It will be followed by onResume().
+   * Called after onCreate(Bundle) — or after onRestart() when the activity had been stopped, but is
+   * now again being displayed to the user. It will be followed by onResume().
    */
   @Override
   public void onStart() {
@@ -61,10 +60,9 @@ public class MovieListActivity extends AppCompatActivity {
   }
 
   /**
-   * Initializes the contents of the Activity's standard options menu.
-   * Menu items are in the resources menu directory.
-   * This is only called once, the first time the options menu is displayed.
-   * To update the menu every time it is displayed, use onPrepareOptionsMenu(Menu).
+   * Initializes the contents of the Activity's standard options menu. Menu items are in the
+   * resources menu directory. This is only called once, the first time the options menu is
+   * displayed. To update the menu every time it is displayed, use onPrepareOptionsMenu(Menu).
    * Returns false by default
    */
   @Override
@@ -90,7 +88,8 @@ public class MovieListActivity extends AppCompatActivity {
     setTitle(SortPreference.getText(this));
 
     // Retrieve fragment to update movies
-    MovieFragment movieFragment = (MovieFragment) getSupportFragmentManager().findFragmentById(R.id.container);
+    MovieFragment movieFragment = (MovieFragment) getSupportFragmentManager()
+        .findFragmentById(R.id.container);
 
     // If fragment isn't null call update movies method
     if (movieFragment != null) {
