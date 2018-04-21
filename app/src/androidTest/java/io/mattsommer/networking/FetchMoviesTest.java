@@ -3,7 +3,6 @@ package io.mattsommer.networking;
 import static junit.framework.Assert.assertNotNull;
 
 import io.mattsommer.data.contract.MovieContract.SORT;
-import java.util.Map;
 import org.junit.Test;
 
 /**
@@ -16,9 +15,4 @@ public class FetchMoviesTest {
     assertNotNull(FetchMovies.Fetch(SORT.POPULARITY));
   }
 
-  @Test
-  public void test() {
-    Map<String, String> getenv = System.getenv();
-    assertNotNull(getenv);
-  }
 }
